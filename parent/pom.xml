@@ -48,16 +48,14 @@
     </developer>
   </developers>
 
-  <scm>
-    <connection>scm:git:git://github.com/fabric8io/fabric8-maven-plugin.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/fabric8io/fabric8-maven-plugin.git</developerConnection>
-    <tag>v4.0.0-M2</tag>
-    <url>git://github.com/fabric8io/fabric8-maven-plugin.git</url>
-  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+<nexus-iotbull-lib-repo-url>http://nexus.iotbull.com:8081/nexus/content/repositories/iotbull-lib-repo/</nexus-iotbull-lib-repo-url>
+		<nexus-snapshots-url>http://nexus.iotbull.com:8081/nexus/content/repositories/snapshots</nexus-snapshots-url>
+		<nexus-release-url>http://nexus.iotbull.com:8081/nexus/content/repositories/releases</nexus-release-url>
+	<nexus-release-id>nexus-release</nexus-release-id>
+				<nexus-snapshots-id>nexus-snapshots</nexus-snapshots-id>
     <!-- latest release version of this plugin. Used in the docs.-->
     <fabric8.maven.plugin.version>3.5.41</fabric8.maven.plugin.version>
 
@@ -127,21 +125,9 @@
     <image.wildfly.upstream>jboss/wildfly:${version.image.wildfly.upstream}</image.wildfly.upstream>
   </properties>
 
-  <repositories>
-    <repository>
-      <id>maven-central-plugin-snapshots</id>
-      <name>Maven Central Plugin Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+  
 
-  <distributionManagement>
+<!--   <distributionManagement>
     <snapshotRepository>
       <id>sonatype-nexus-snapshots</id>
       <name>Sonatype Nexus Snapshots</name>
@@ -152,8 +138,19 @@
       <name>Nexus Release Repository</name>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
-  </distributionManagement>
-
+  </distributionManagement> -->
+	<distributionManagement>
+		<repository>
+			<id>${nexus-release-id}</id>
+			<url>${nexus-release-url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>${nexus-snapshots-id}</id>
+			<name>User Project Snapshot</name>
+			<url>${nexus-snapshots-url}</url>
+			<uniqueVersion>true</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
   <dependencyManagement>
     <dependencies>
 

@@ -38,6 +38,7 @@
     - fmp-debug
     - fmp-remove-build-annotations
     - fmp-volume-permission
+    - fmp-initContainer    
     - fmp-configmap-file
 
     # Route exposure
@@ -104,6 +105,7 @@
     - fmp-controller
     - fmp-service
     - fmp-image
+    - fmp-initContainer
     - fmp-project
     - fmp-debug
   # Only dependencies, no build, use other resources raw

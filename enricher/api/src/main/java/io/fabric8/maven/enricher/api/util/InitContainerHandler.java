@@ -16,8 +16,11 @@
 package io.fabric8.maven.enricher.api.util;
 
 import java.util.List;
+import java.util.Map;
 
 import io.fabric8.kubernetes.api.model.Container;
+import io.fabric8.kubernetes.api.model.ContainerBuilder;
+import io.fabric8.kubernetes.api.model.PodSpec;
 import io.fabric8.kubernetes.api.model.PodTemplateSpecBuilder;
 import io.fabric8.maven.docker.util.Logger;
 
@@ -49,6 +52,28 @@ public class InitContainerHandler {
             }
         }
         return null;
+    }
+
+    public void changeInitContainer(PodTemplateSpecBuilder builder) {
+       
+        if (builder != null) {
+            List<Container> initContainers = builder.buildSpec().getInitContainers();
+            for (Container initContainer: initContainers) {
+            	initContainer.setLivenessProbe(null);
+            	initContainer.setReadinessProbe(null);
+            }
+            builder.editSpec().withInitContainers(initContainers).endSpec();
+        }
+    }
+  
+    
+    private Container createInitContainer(PodSpec podSpec,Container initContainer) {
+       
+        return new ContainerBuilder()
+                .withName(initContainer.getName())
+                .withImage(initContainer.getImage())
+                .withCommand(initContainer.getCommand())
+                .build();
     }
 
     public void removeInitContainer(PodTemplateSpecBuilder builder, String initContainerName) {

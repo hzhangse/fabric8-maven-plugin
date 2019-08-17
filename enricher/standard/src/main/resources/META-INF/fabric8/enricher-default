@@ -76,3 +76,6 @@ io.fabric8.maven.enricher.standard.openshift.ExposeEnricher
 
 # Enhance a given controller with the configuration information presented in the plugin configuration.
 io.fabric8.maven.enricher.standard.ControllerViaPluginConfigurationEnricher
+
+
+io.fabric8.maven.enricher.standard.InitContainerEnricher
